@@ -1,3 +1,5 @@
+package pl.pawellakomiec;
+
 public class System{
     private String Name;
 
