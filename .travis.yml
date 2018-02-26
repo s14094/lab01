@@ -1,1 +1,6 @@
-
+{
+  "language": "java",
+  "os": "osx"
+  "group": "stable",
+  "dist": "trusty"
+}
