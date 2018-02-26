@@ -1,5 +1,7 @@
 package pl.pawellakomiec;
 
+import java.util.*;
+
 public class System{
     private String Name;
 
