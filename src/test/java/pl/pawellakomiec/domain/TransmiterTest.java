@@ -1,9 +1,9 @@
-package pl.pawellakomiec;
+package pl.pawellakomiec.domain;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.pawellakomiec.Transmiter;
+import pl.pawellakomiec.domain.Transmiter;
 
 import static org.junit.Assert.*;
 
