@@ -14,4 +14,5 @@ public interface TransmiterRepository {
     public void deleteTransmiter(Transmiter transmiter);
     public void updateTransmiter(long id, Transmiter newTransmiter);
 
+    public void dropTransmiterTable();
 }

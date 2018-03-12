@@ -1,5 +1,6 @@
 package pl.pawellakomiec.repository;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.pawellakomiec.domain.Transmiter;
@@ -15,7 +16,6 @@ public class TransmiterRepositoryTest {
 
     TransmiterRepository transmiterRepository;
 
-
     @Before
     public void init_db() {
         transmiterRepository.initDatabase();
@@ -27,19 +27,19 @@ public class TransmiterRepositoryTest {
         Transmiter transmiter4 = new Transmiter();
 
         transmiter1.setId(1);
-        transmiter1.setName("trasmiter1");
+        transmiter1.setName("transmiter1");
         transmiter1.setPrice(100);
 
         transmiter2.setId(2);
-        transmiter2.setName("trasmiter2");
+        transmiter2.setName("transmiter2");
         transmiter2.setPrice(200);
 
         transmiter3.setId(3);
-        transmiter3.setName("trasmiter3");
+        transmiter3.setName("transmiter3");
         transmiter3.setPrice(300);
 
         transmiter4.setId(4);
-        transmiter4.setName("trasmiter4");
+        transmiter4.setName("transmiter4");
         transmiter4.setPrice(400);
 
         transmiterRepository.addTransmiter(transmiter1);
@@ -71,7 +71,7 @@ public class TransmiterRepositoryTest {
     }
 
     @Test
-    public void delete_trasmiter(){
+    public void delete_transmiter(){
         Transmiter transmiter3 = transmiterRepository.getById(3);
         transmiterRepository.deleteTransmiter(transmiter3);
         if (transmiterRepository.getAll().size() > 0){
@@ -82,27 +82,30 @@ public class TransmiterRepositoryTest {
     }
 
     @Test
-    public void search_trasmiter(){
+    public void search_transmiter(){
         Long idToFind = (long) 1;
         assertNotNull(transmiterRepository.getById(idToFind));
     }
 
     @Test
-    public void update_trasmiter() {
+    public void update_transmiter() {
         Transmiter transmiter2 = new Transmiter();
+        int updateId = 1;
         transmiter2.setId(22);
         transmiter2.setName("transmiter222");
         transmiter2.setPrice(222);
-        long transmiterToUpdate = 1;
-        transmiterRepository.updateTransmiter(transmiterToUpdate, transmiter2);
-        assertEquals(transmiterRepository.getById(transmiterToUpdate).getName(), transmiter2.getName());
+        transmiterRepository.updateTransmiter(updateId, transmiter2);
+        assertEquals(transmiterRepository.getById(updateId).getName(), transmiter2.getName());
 
         for(Transmiter transmiter1 : transmiterRepository.getAll()){
-            //if(transmiter2.getId().equals(transmiterToUpdate)){
-                assertNotNull(transmiter1.getName(), transmiter2.getName());
-            //}
+            assertNotNull(transmiter1.getName(), transmiter2.getName());
         }
+    }
 
+    @After
+    public void drop_table(){
+        TransmiterRepositoryFactory.getInstance().dropTransmiterTable();
+        assertEquals(null, TransmiterRepositoryFactory.getInstance().getAll());
     }
 }
 
