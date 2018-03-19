@@ -8,7 +8,7 @@ public class TransmiterRepositoryFactory {
     public static TransmiterRepository getInstance() {
         try {
             String url = "jdbc:hsqldb:hsql://localhost/workdb";
-            return new TransmiterRepositoryImplementation(DriverManager.getConnection(url));
+            return new TransmiterRepositoryImpl(DriverManager.getConnection(url));
         }
         catch (SQLException e){
             return null;

@@ -1,9 +1,6 @@
 package pl.pawellakomiec.repository;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 import pl.pawellakomiec.domain.Transmiter;
 import pl.pawellakomiec.repository.TransmiterRepository;
@@ -23,7 +20,7 @@ public class TransmiterRepositoryTest {
 
 
     @Before
-    public void init_db() {
+    public void initRepository() {
 
         transmiterRepository = TransmiterRepositoryFactory.getInstance();
         Transmiter transmiter1 = new Transmiter();
@@ -34,18 +31,22 @@ public class TransmiterRepositoryTest {
         transmiter1.setId(1);
         transmiter1.setName("transmiter1");
         transmiter1.setPrice(100);
+        transmiter1.setPower(40);
 
         transmiter2.setId(2);
         transmiter2.setName("transmiter2");
         transmiter2.setPrice(200);
+        transmiter1.setPower(40);
 
         transmiter3.setId(3);
         transmiter3.setName("transmiter3");
         transmiter3.setPrice(300);
+        transmiter1.setPower(40);
 
         transmiter4.setId(4);
         transmiter4.setName("transmiter4");
         transmiter4.setPrice(400);
+        transmiter1.setPower(40);
 
         transmiterRepository.addTransmiter(transmiter1);
         transmiterRepository.addTransmiter(transmiter2);
@@ -53,15 +54,15 @@ public class TransmiterRepositoryTest {
         transmiterRepository.addTransmiter(transmiter4);
     }
 
-
+    @Ignore
     @Test
-    public void say_hello() {
+    public void say_hello() throws SQLException{
         String message = "Hello";
         assertEquals("Message: ", message);
     }
 
     @Test
-    public void get_all() {
+    public void get_all() throws SQLException{
         assertNotNull(transmiterRepository.getAll());
     }
 
@@ -82,7 +83,6 @@ public class TransmiterRepositoryTest {
 
         if (transmiterRepository.getAll().size() > 0) {
             assertNotNull(transmiterRepository.getAll());
-        } else {
             assertNull(transmiterRepository.getById(transmiter3.getId()));
         }
 

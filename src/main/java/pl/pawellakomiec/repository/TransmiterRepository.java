@@ -4,10 +4,15 @@ import pl.pawellakomiec.domain.Transmiter;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.sql.Connection;
 
 public interface TransmiterRepository {
 
-    public List<Transmiter> getAll();
+    public void setConnection(Connection connection) throws SQLException;
+
+    public Connection getConnection();
+
+    public List<Transmiter> getAll() throws SQLException;
 
     public Transmiter getById(int id) throws SQLException;
 
