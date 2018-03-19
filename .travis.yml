@@ -1,7 +1,11 @@
 language: java
 jdk:
   - oraclejdk9
-script:
-  - mvn test
 notifications:
     email: false
+before_script:
+- cd scripts; ./server.sh &
+script:
+- cd ..;
+- sleep 1
+mvn test
