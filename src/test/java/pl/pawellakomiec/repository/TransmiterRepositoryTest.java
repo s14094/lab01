@@ -2,23 +2,28 @@ package pl.pawellakomiec.repository;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import pl.pawellakomiec.domain.Transmiter;
 import pl.pawellakomiec.repository.TransmiterRepository;
 import pl.pawellakomiec.repository.TransmiterRepositoryFactory;
 import org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import java.sql.SQLException;
+
+import static org.junit.Assert.*;
 
 public class TransmiterRepositoryTest {
 
     TransmiterRepository transmiterRepository;
 
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
+
     @Before
     public void init_db() {
-        transmiterRepository.initDatabase();
 
         transmiterRepository = TransmiterRepositoryFactory.getInstance();
         Transmiter transmiter1 = new Transmiter();
@@ -50,18 +55,18 @@ public class TransmiterRepositoryTest {
 
 
     @Test
-    public void say_hello(){
+    public void say_hello() {
         String message = "Hello";
         assertEquals("Message: ", message);
     }
 
     @Test
-    public void get_all(){
+    public void get_all() {
         assertNotNull(transmiterRepository.getAll());
     }
 
     @Test
-    public void create_transmiter(){
+    public void create_transmiter() throws SQLException {
         Transmiter transmiter5 = new Transmiter();
         transmiter5.setId(5);
         transmiter5.setName("create - transmiter5");
@@ -71,25 +76,31 @@ public class TransmiterRepositoryTest {
     }
 
     @Test
-    public void delete_transmiter(){
+    public void delete_transmiter() throws SQLException {
         Transmiter transmiter3 = transmiterRepository.getById(3);
         transmiterRepository.deleteTransmiter(transmiter3);
-        if (transmiterRepository.getAll().size() > 0){
+
+        if (transmiterRepository.getAll().size() > 0) {
             assertNotNull(transmiterRepository.getAll());
-        }else{
+        } else {
             assertNull(transmiterRepository.getById(transmiter3.getId()));
         }
+
     }
 
     @Test
-    public void search_transmiter(){
-        Long idToFind = (long) 1;
+    public void search_transmiter() throws SQLException {
+        int idToFind = 1;
         assertNotNull(transmiterRepository.getById(idToFind));
     }
 
     @Test
-    public void update_transmiter() {
-        Transmiter transmiter2 = new Transmiter();
+    public void update_transmiter() throws SQLException {
+        Transmiter transmiter2 = TransmiterRepositoryFactory.getInstance().getById(2);
+        if (transmiter2 == null) {
+            exception.expect(ClassNotFoundException.class);
+        }
+
         int updateId = 1;
         transmiter2.setId(22);
         transmiter2.setName("transmiter222");
@@ -97,13 +108,13 @@ public class TransmiterRepositoryTest {
         transmiterRepository.updateTransmiter(updateId, transmiter2);
         assertEquals(transmiterRepository.getById(updateId).getName(), transmiter2.getName());
 
-        for(Transmiter transmiter1 : transmiterRepository.getAll()){
+        for (Transmiter transmiter1 : transmiterRepository.getAll()) {
             assertNotNull(transmiter1.getName(), transmiter2.getName());
         }
     }
 
     @After
-    public void drop_table(){
+    public void drop_table() throws SQLException {
         TransmiterRepositoryFactory.getInstance().dropTransmiterTable();
         assertEquals(null, TransmiterRepositoryFactory.getInstance().getAll());
     }
