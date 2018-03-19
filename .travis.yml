@@ -6,6 +6,5 @@ notifications:
 before_script:
 - cd scripts; ./server.sh &
 script:
-- cd ..;
 - sleep 1
-- mvn test
+- cd ..; mvn test

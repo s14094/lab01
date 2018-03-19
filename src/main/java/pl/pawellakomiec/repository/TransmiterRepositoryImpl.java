@@ -27,7 +27,6 @@ public class TransmiterRepositoryImpl implements TransmiterRepository{
         setConnection(connection);
     }
 
-
     public void setConnection(Connection connection) throws SQLException{
         this.connection = connection;
         addTransmiterStmt = connection.prepareStatement("INSERT INTO Transmiter (name, price, power) VALUES (?, ?, ?)");
