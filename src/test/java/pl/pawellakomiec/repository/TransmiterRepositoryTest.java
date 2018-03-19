@@ -2,6 +2,8 @@ package pl.pawellakomiec.repository;
 
 import org.junit.*;
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import pl.pawellakomiec.domain.Transmiter;
 import pl.pawellakomiec.repository.TransmiterRepository;
 import pl.pawellakomiec.repository.TransmiterRepositoryFactory;
@@ -11,6 +13,7 @@ import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
+@RunWith(JUnit4.class)
 public class TransmiterRepositoryTest {
 
     TransmiterRepository transmiterRepository;
@@ -36,17 +39,17 @@ public class TransmiterRepositoryTest {
         transmiter2.setId(2);
         transmiter2.setName("transmiter2");
         transmiter2.setPrice(200);
-        transmiter1.setPower(40);
+        transmiter2.setPower(40);
 
         transmiter3.setId(3);
         transmiter3.setName("transmiter3");
         transmiter3.setPrice(300);
-        transmiter1.setPower(40);
+        transmiter3.setPower(40);
 
         transmiter4.setId(4);
         transmiter4.setName("transmiter4");
         transmiter4.setPrice(400);
-        transmiter1.setPower(40);
+        transmiter4.setPower(40);
 
         transmiterRepository.addTransmiter(transmiter1);
         transmiterRepository.addTransmiter(transmiter2);
@@ -56,7 +59,7 @@ public class TransmiterRepositoryTest {
 
     @Ignore
     @Test
-    public void say_hello() throws SQLException{
+    public void say_hello() {
         String message = "Hello";
         assertEquals("Message: ", message);
     }
@@ -68,12 +71,14 @@ public class TransmiterRepositoryTest {
 
     @Test
     public void create_transmiter() throws SQLException {
+
         Transmiter transmiter5 = new Transmiter();
-        transmiter5.setId(5);
-        transmiter5.setName("create - transmiter5");
+        transmiter5.setName("createtransmiter5");
         transmiter5.setPrice(50);
+        transmiter5.setPower(30);
         transmiterRepository.addTransmiter(transmiter5);
         assertNotNull(transmiterRepository.getById(transmiter5.getId()));
+
     }
 
     @Test
@@ -85,7 +90,6 @@ public class TransmiterRepositoryTest {
             assertNotNull(transmiterRepository.getAll());
             assertNull(transmiterRepository.getById(transmiter3.getId()));
         }
-
     }
 
     @Test
@@ -96,6 +100,7 @@ public class TransmiterRepositoryTest {
 
     @Test
     public void update_transmiter() throws SQLException {
+
         Transmiter transmiter2 = TransmiterRepositoryFactory.getInstance().getById(2);
         if (transmiter2 == null) {
             exception.expect(ClassNotFoundException.class);
@@ -114,9 +119,8 @@ public class TransmiterRepositoryTest {
     }
 
     @After
-    public void drop_table() throws SQLException {
-        TransmiterRepositoryFactory.getInstance().dropTransmiterTable();
-        assertEquals(null, TransmiterRepositoryFactory.getInstance().getAll());
+    public void dropTable() throws SQLException {
+        transmiterRepository.dropDatatable();
     }
 }
 

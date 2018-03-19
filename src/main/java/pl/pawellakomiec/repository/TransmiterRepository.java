@@ -8,19 +8,19 @@ import java.sql.Connection;
 
 public interface TransmiterRepository {
 
-    public void setConnection(Connection connection) throws SQLException;
+    void setConnection(Connection connection) throws SQLException;
 
-    public Connection getConnection();
+    Connection getConnection();
 
-    public List<Transmiter> getAll() throws SQLException;
+    List<Transmiter> getAll() throws SQLException;
 
-    public Transmiter getById(int id) throws SQLException;
+    Transmiter getById(int id) throws SQLException;
 
-    public void addTransmiter(Transmiter transmiter);
+    void addTransmiter(Transmiter transmiter);
 
-    public void deleteTransmiter(Transmiter transmiter) throws SQLException;;
+    void deleteTransmiter(Transmiter transmiter) throws SQLException;
 
-    public void updateTransmiter(int id, Transmiter newTransmiter) throws SQLException;;
+    void updateTransmiter(int id, Transmiter newTransmiter) throws SQLException;
 
-    public void dropTransmiterTable() throws SQLException;
+    void dropDatatable() throws SQLException;
 }
