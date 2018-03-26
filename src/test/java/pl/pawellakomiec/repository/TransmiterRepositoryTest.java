@@ -90,17 +90,21 @@ public class TransmiterRepositoryTest {
     @Test
     public void update_transmiter() throws SQLException {
 
-        Transmiter transmiter2 = TransmiterRepositoryFactory.getInstance().getById(2);
+        Transmiter transmiter2 = transmiterRepository.getById(2);
+
         int updateId = 1;
-        transmiter2.setId(22);
         transmiter2.setName("transmiter222");
-        transmiter2.setPrice(222);
+
         transmiterRepository.updateTransmiter(updateId, transmiter2);
         assertEquals(transmiterRepository.getById(updateId).getName(), transmiter2.getName());
 
         transmiterRepository.getAll().forEach(x->{
-            if(x.getId() == transmiter2.getId() && !(x.getName().equals(transmiter2.getName()))){
+            int updateNumber = 0;
+            if(x.getName().equals(transmiter2.getName())) {
+                updateNumber++;
+                if (updateNumber > 1) {
                 assertTrue(false);
+                }
             }
         });
     }
