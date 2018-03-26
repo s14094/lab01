@@ -57,13 +57,6 @@ public class TransmiterRepositoryTest {
         transmiterRepository.addTransmiter(transmiter4);
     }
 
-    @Ignore
-    @Test
-    public void say_hello() {
-        String message = "Hello";
-        assertEquals("Message: ", message);
-    }
-
     @Test
     public void get_all() throws SQLException{
         assertNotNull(transmiterRepository.getAll());
@@ -71,24 +64,20 @@ public class TransmiterRepositoryTest {
 
     @Test
     public void create_transmiter() throws SQLException {
-
         Transmiter transmiter5 = new Transmiter();
         transmiter5.setName("createtransmiter5");
         transmiter5.setPrice(50);
         transmiter5.setPower(30);
         transmiterRepository.addTransmiter(transmiter5);
         assertNotNull(transmiterRepository.getById(transmiter5.getId()));
-
     }
 
     @Test
     public void delete_transmiter() throws SQLException {
         Transmiter transmiter3 = transmiterRepository.getById(3);
         transmiterRepository.deleteTransmiter(transmiter3);
-
-        if (transmiterRepository.getAll().size() > 0) {
-            assertNotNull(transmiterRepository.getAll());
-            assertNull(transmiterRepository.getById(transmiter3.getId()));
+        if (transmiterRepository.getAll().isEmpty()) {
+            assertTrue(false);
         }
     }
 
@@ -102,10 +91,6 @@ public class TransmiterRepositoryTest {
     public void update_transmiter() throws SQLException {
 
         Transmiter transmiter2 = TransmiterRepositoryFactory.getInstance().getById(2);
-        if (transmiter2 == null) {
-            exception.expect(ClassNotFoundException.class);
-        }
-
         int updateId = 1;
         transmiter2.setId(22);
         transmiter2.setName("transmiter222");
@@ -113,9 +98,11 @@ public class TransmiterRepositoryTest {
         transmiterRepository.updateTransmiter(updateId, transmiter2);
         assertEquals(transmiterRepository.getById(updateId).getName(), transmiter2.getName());
 
-        for (Transmiter transmiter1 : transmiterRepository.getAll()) {
-            assertNotNull(transmiter1.getName(), transmiter2.getName());
-        }
+        transmiterRepository.getAll().forEach(x->{
+            if(x.getId() == transmiter2.getId() && !(x.getName().equals(transmiter2.getName()))){
+                assertTrue(false);
+            }
+        });
     }
 
     @After
@@ -123,5 +110,3 @@ public class TransmiterRepositoryTest {
         transmiterRepository.dropDatatable();
     }
 }
-
-
