@@ -21,7 +21,6 @@ public class TransmiterRepositoryTest {
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
-
     @Before
     public void initRepository() {
 
