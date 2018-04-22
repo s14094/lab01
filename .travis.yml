@@ -1,6 +1,7 @@
 language: java
 notifications:
     email: false
+install: true
 before_script:
 - cd scripts; ./server.sh &
 script:
