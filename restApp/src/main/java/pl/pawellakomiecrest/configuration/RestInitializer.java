@@ -20,9 +20,10 @@ public class RestInitializer implements WebApplicationInitializer {
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/*");
     }
-   private AnnotationConfigWebApplicationContext getContext(){
+
+    private AnnotationConfigWebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.setConfigLocation("pl.pawellakomiedrest.configuration");
         return context;
-   }
+    }
 }

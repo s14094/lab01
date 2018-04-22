@@ -1,13 +1,13 @@
 package pl.pawellakomiec.repository;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import pl.pawellakomiec.domain.Transmiter;
-import pl.pawellakomiec.repository.TransmiterRepository;
-import pl.pawellakomiec.repository.TransmiterRepositoryFactory;
-import org.junit.Assert.*;
 
 import java.sql.SQLException;
 
@@ -16,10 +16,9 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class TransmiterRepositoryTest {
 
-    TransmiterRepository transmiterRepository;
-
     @Rule
     public final ExpectedException exception = ExpectedException.none();
+    TransmiterRepository transmiterRepository;
 
     @Before
     public void initRepository() {
@@ -57,7 +56,7 @@ public class TransmiterRepositoryTest {
     }
 
     @Test
-    public void get_all() throws SQLException{
+    public void get_all() throws SQLException {
         assertNotNull(transmiterRepository.getAll());
     }
 
@@ -97,12 +96,12 @@ public class TransmiterRepositoryTest {
         transmiterRepository.updateTransmiter(updateId, transmiter2);
         assertEquals(transmiterRepository.getById(updateId).getName(), transmiter2.getName());
 
-        transmiterRepository.getAll().forEach(x->{
+        transmiterRepository.getAll().forEach(x -> {
             int updateNumber = 0;
-            if(x.getName().equals(transmiter2.getName())) {
+            if (x.getName().equals(transmiter2.getName())) {
                 updateNumber++;
                 if (updateNumber > 1) {
-                assertTrue(false);
+                    assertTrue(false);
                 }
             }
         });

@@ -12,10 +12,10 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan({"pl.pawellakomiecrest"})
-public class RestConfiguration extends WebMvcConfigurerAdapter{
+public class RestConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters){
+    public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {
         super.configureMessageConverters(messageConverters);
     }
 

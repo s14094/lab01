@@ -1,47 +1,36 @@
 package pl.pawellakomiec.repository;
 
 
-
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import pl.pawellakomiec.domain.Transmiter;
-import pl.pawellakomiec.repository.TransmiterRepository;
-import pl.pawellakomiec.repository.TransmiterRepositoryFactory;
-import org.junit.Assert.*;
-import org.mockito.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class TransmiterRepositoryTestMockito {
 
-    TransmiterRepository transmiterRepository;
-
-    @Mock
-    Connection connectionMock;
-
-    @Mock
-    PreparedStatement insertStatementMock;
-
-    @Mock
-    PreparedStatement selectStatementMock;
-
-
-
     @Rule
     public final ExpectedException exception = ExpectedException.none();
-
+    TransmiterRepository transmiterRepository;
+    @Mock
+    Connection connectionMock;
+    @Mock
+    PreparedStatement insertStatementMock;
+    @Mock
+    PreparedStatement selectStatementMock;
 
     @Before
     public void initRepository() throws SQLException {
@@ -88,7 +77,7 @@ public class TransmiterRepositoryTestMockito {
     }
 
     @Test
-    public void get_all() throws SQLException{
+    public void get_all() throws SQLException {
         assertNotNull(transmiterRepository.getAll());
     }
 
@@ -118,9 +107,9 @@ public class TransmiterRepositoryTestMockito {
         transmiterRepository.updateTransmiter(updateId, transmiter2);
         assertEquals(transmiterRepository.getById(updateId).getName(), transmiter2.getName());
 
-        transmiterRepository.getAll().forEach(x->{
+        transmiterRepository.getAll().forEach(x -> {
             int updateNumber = 0;
-            if(x.getName().equals(transmiter2.getName())) {
+            if (x.getName().equals(transmiter2.getName())) {
                 updateNumber++;
                 if (updateNumber > 1) {
                     assertTrue(false);

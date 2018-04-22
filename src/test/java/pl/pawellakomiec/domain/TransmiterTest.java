@@ -3,9 +3,7 @@ package pl.pawellakomiec.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.pawellakomiec.domain.Transmiter;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class TransmiterTest {
 

@@ -3,13 +3,11 @@ package transmiterTests.domain;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pl.pawellakomiecrest.domain.Transmiter;
 import pl.pawellakomiecrest.service.TransmiterRepository;
 import pl.pawellakomiecrest.service.TransmiterRepositoryImpl;
 
 import java.sql.SQLException;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class TransmiterRepoTest {
@@ -22,7 +20,7 @@ public class TransmiterRepoTest {
 
     @After
     public void cleanup() throws SQLException {
-    //transmiterRepository.dropDatatable();
+        //transmiterRepository.dropDatatable();
     }
 
     @Test

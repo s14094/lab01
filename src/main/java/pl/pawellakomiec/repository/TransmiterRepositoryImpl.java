@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TransmiterRepositoryImpl implements TransmiterRepository{
+public class TransmiterRepositoryImpl implements TransmiterRepository {
 
     private Connection connection;
     private PreparedStatement addTransmiterStmt;
@@ -27,7 +27,11 @@ public class TransmiterRepositoryImpl implements TransmiterRepository{
         setConnection(connection);
     }
 
-    public void setConnection(Connection connection) throws SQLException{
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) throws SQLException {
         this.connection = connection;
         addTransmiterStmt = connection.prepareStatement("INSERT INTO Transmiter (name, price, power) VALUES (?, ?, ?)");
         getAllStmt = connection.prepareStatement("SELECT * FROM Transmiter");
@@ -35,10 +39,6 @@ public class TransmiterRepositoryImpl implements TransmiterRepository{
         deleteTableStmt = connection.prepareStatement("DROP TABLE Transmiter");
         updateStmt = connection.prepareStatement("UPDATE Transmiter SET name = ? WHERE id = ?");
         deleteByIdStmt = connection.prepareStatement("DELETE FROM Transmiter WHERE id = ?");
-    }
-
-    public Connection getConnection() {
-        return connection;
     }
 
     public void createTables() throws SQLException {
@@ -83,35 +83,33 @@ public class TransmiterRepositoryImpl implements TransmiterRepository{
     }
 
     @Override
-    public Transmiter getById(int id) throws SQLException{
+    public Transmiter getById(int id) throws SQLException {
         getByIdStmt.setInt(1, id);
         ResultSet results = getByIdStmt.executeQuery();
-        if(results.next()) {
+        if (results.next()) {
             Transmiter transmiter = new Transmiter();
             transmiter.setId(results.getInt("id"));
             transmiter.setName(results.getString("name"));
             return transmiter;
-        }
-        else{
+        } else {
             return null;
         }
     }
 
     @Override
     public void addTransmiter(Transmiter transmiter) {
-        try{
+        try {
             addTransmiterStmt.setString(1, transmiter.getName());
             addTransmiterStmt.setInt(2, transmiter.getPower());
             addTransmiterStmt.setInt(3, transmiter.getPrice());
             addTransmiterStmt.executeUpdate();
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage() + "\n" + e.getStackTrace().toString());
         }
     }
 
     @Override
-    public void deleteTransmiter(Transmiter transmiter) throws SQLException{
+    public void deleteTransmiter(Transmiter transmiter) throws SQLException {
 
         deleteByIdStmt.setInt(1, transmiter.getId());
         deleteByIdStmt.executeUpdate();
@@ -119,15 +117,16 @@ public class TransmiterRepositoryImpl implements TransmiterRepository{
     }
 
     @Override
-    public void updateTransmiter(int id, Transmiter newTransmiter) throws SQLException{
+    public void updateTransmiter(int id, Transmiter newTransmiter) throws SQLException {
 
         updateStmt.setInt(2, id);
         updateStmt.setString(1, newTransmiter.getName());
         updateStmt.executeUpdate();
 
     }
+
     @Override
-    public void dropDatatable() throws SQLException{
+    public void dropDatatable() throws SQLException {
         deleteTableStmt.executeUpdate();
     }
 

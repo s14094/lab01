@@ -2,15 +2,15 @@ package pl.pawellakomiec.repository;
 
 import pl.pawellakomiec.domain.Transmiter;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.sql.Connection;
 
 public interface TransmiterRepository {
 
-    void setConnection(Connection connection) throws SQLException;
-
     Connection getConnection();
+
+    void setConnection(Connection connection) throws SQLException;
 
     List<Transmiter> getAll() throws SQLException;
 
