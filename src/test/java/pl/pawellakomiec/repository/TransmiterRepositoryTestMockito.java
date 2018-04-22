@@ -1,10 +1,13 @@
 package pl.pawellakomiec.repository;
 
+
+
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.mockito.junit.MockitoJUnitRunner;
+
+import org.mockito.runners.MockitoJUnitRunner;
 import pl.pawellakomiec.domain.Transmiter;
 import pl.pawellakomiec.repository.TransmiterRepository;
 import pl.pawellakomiec.repository.TransmiterRepositoryFactory;
