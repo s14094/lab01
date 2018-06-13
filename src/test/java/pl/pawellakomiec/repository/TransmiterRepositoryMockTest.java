@@ -36,7 +36,7 @@ public class TransmiterRepositoryMockTest {
     @Before
     public void setupDatabase() throws SQLException {
 
-        when(connectionMock.prepareStatement("INSERT INTO Transmiter (id,name,price,power) VALUES (?,?,?,?)")).thenReturn(insertStatementMock);
+        when(connectionMock.prepareStatement("INSERT INTO Transmiter (name,price,power) VALUES (?,?,?)")).thenReturn(insertStatementMock);
         when(connectionMock.prepareStatement("SELECT * FROM Transmiter")).thenReturn(selectStatementMock);
 
         transmiterRepository = new TransmiterRepositoryImpl();
@@ -45,7 +45,7 @@ public class TransmiterRepositoryMockTest {
 
 //        ((TransmiterManagerImpl) transmiterRepository).connection = connectionMock;
 
-        verify(connectionMock).prepareStatement("INSERT INTO Transmiter (id,name,price,power) VALUES (?,?,?,?)");
+        verify(connectionMock).prepareStatement("INSERT INTO Transmiter (name,price,power) VALUES (?,?,?)");
         verify(connectionMock).prepareStatement("SELECT * FROM Transmiter");
     }
 
@@ -56,15 +56,14 @@ public class TransmiterRepositoryMockTest {
         Transmiter transmiter = new Transmiter();
         transmiter.setId(1);
         transmiter.setName("name");
-        transmiter.setPrice(66);
-        transmiter.setPower(77);
+        transmiter.setPrice(1);
+        transmiter.setPower(1);
         transmiterRepository.addTransmiter(transmiter);
 
 //        assertEquals(1, transmiterRepository.addTransmiter(transmiter));
-        verify(insertStatementMock, times(1)).setInt(1, 1);
-        verify(insertStatementMock, times(1)).setString(2, "name");
-        verify(insertStatementMock, times(1)).setInt(3, 66);
-        verify(insertStatementMock, times(1)).setInt(3, 77);
+        verify(insertStatementMock, times(1)).setString(1, "name");
+        verify(insertStatementMock, times(1)).setInt(2, 1);
+        verify(insertStatementMock, times(1)).setInt(3, 1);
         verify(insertStatementMock).executeUpdate();
     }
 
@@ -118,17 +117,15 @@ public class TransmiterRepositoryMockTest {
         when(insertStatementMock.executeUpdate()).thenReturn(1);
 
         Transmiter transmiter = new Transmiter();
-        transmiter.setId(1);
         transmiter.setName("name");
-        transmiter.setPrice(66);
-        transmiter.setPrice(77);
+        transmiter.setPrice(1);
+        transmiter.setPower(1);
 
         assertEquals(1, transmiterRepository.addTransmiter(transmiter));
 
-        inorder.verify(insertStatementMock, times(1)).setInt(1, 1);
-        inorder.verify(insertStatementMock, times(1)).setString(2, "name");
-        inorder.verify(insertStatementMock, times(1)).setInt(1, 66);
-        inorder.verify(insertStatementMock, times(1)).setInt(1, 77);
+        inorder.verify(insertStatementMock, times(1)).setString(1, "name");
+        inorder.verify(insertStatementMock, times(1)).setInt(2, 1);
+        inorder.verify(insertStatementMock, times(1)).setInt(3, 1);
 
         inorder.verify(insertStatementMock).executeUpdate();
     }

@@ -37,8 +37,9 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
     }
 
 
-    public void prepareStatements() throws SQLException {
-        addTransmiterStmt = connection.prepareStatement("INSERT INTO Transmiter (name, price, power) VALUES (?, ?, ?)");
+    public void setConnection(Connection connection) throws SQLException {
+        this.connection = connection;
+        addTransmiterStmt = connection.prepareStatement("INSERT INTO Transmiter (name,price,power) VALUES (?,?,?)");
         getAllStmt = connection.prepareStatement("SELECT * FROM Transmiter");
         getByIdStmt = connection.prepareStatement("SELECT * FROM Transmiter WHERE id = ?");
         deleteTableStmt = connection.prepareStatement("DROP TABLE Transmiter");
@@ -46,9 +47,9 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
         deleteByIdStmt = connection.prepareStatement("DELETE FROM Transmiter WHERE id = ?");
     }
 
-    public void setConnection(Connection connection) throws SQLException {
-        this.connection = connection;
-    }
+//    public void setConnection(Connection connection) throws SQLException {
+//        this.connection = connection;
+//    }
 
     public void createTables() throws SQLException {
         connection.createStatement().executeUpdate(
@@ -82,6 +83,9 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
                 Transmiter u = new Transmiter();
                 u.setId(results.getInt("id"));
                 u.setName(results.getString("name"));
+                u.setPrice(results.getInt("price"));
+                u.setPower(results.getInt("power"));
+
                 transmiters.add(u);
             }
 
@@ -106,13 +110,14 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
     }
 
     @Override
-    public Boolean addTransmiter(Transmiter transmiter) {
+    public int addTransmiter(Transmiter transmiter) {
+        int count = 0;
         try {
             addTransmiterStmt.setString(1, transmiter.getName());
             addTransmiterStmt.setInt(2, transmiter.getPower());
             addTransmiterStmt.setInt(3, transmiter.getPrice());
-            addTransmiterStmt.executeUpdate();
-            return true;
+            count = addTransmiterStmt.executeUpdate();
+            return count;
         } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage() + "\n" + e.getStackTrace().toString());
         }

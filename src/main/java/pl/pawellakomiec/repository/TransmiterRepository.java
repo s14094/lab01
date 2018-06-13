@@ -16,7 +16,7 @@ public interface TransmiterRepository {
 
     Transmiter getById(int id) throws SQLException;
 
-    Boolean addTransmiter(Transmiter transmiter);
+    int addTransmiter(Transmiter transmiter);
 
     void deleteTransmiter(Transmiter transmiter) throws SQLException;
 

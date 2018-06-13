@@ -1,10 +1,8 @@
 package pl.pawellakomiec.repository;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-@RunWith(JUnit4.class)
-public class TransmiterRepositoryTest {
+//
+//@RunWith(JUnit4.class)
+//public class TransmiterRepositoryTest {
 //
 //    @Rule
 //    public final ExpectedException exception = ExpectedException.none();
@@ -107,4 +105,4 @@ public class TransmiterRepositoryTest {
         transmiterRepository.dropDatatable();
     }
     */
-}
+//}
