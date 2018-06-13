@@ -29,9 +29,10 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
         setConnection(connection);
     }
 
-    public TransmiterRepositoryImpl() {
+    public TransmiterRepositoryImpl(){
 
     }
+
 
     public Connection getConnection() {
         return connection;
