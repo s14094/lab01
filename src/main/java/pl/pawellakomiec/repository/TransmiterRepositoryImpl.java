@@ -1,5 +1,6 @@
 package pl.pawellakomiec.repository;
 
+import org.springframework.stereotype.Component;
 import pl.pawellakomiec.domain.Transmiter;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+@Component
 public class TransmiterRepositoryImpl implements TransmiterRepository {
 
     private Connection connection;
@@ -20,12 +22,11 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
     private PreparedStatement deleteByIdStmt;
 
     public TransmiterRepositoryImpl(Connection connection) throws SQLException {
-//        this.connection = connection;
-//        prepareStatements();
-//        if (!isDatabaseReady()) {
-//            createTables();
-//        }
-//        setConnection(connection);
+        this.connection = connection;
+        if (!isDatabaseReady()) {
+            createTables();
+        }
+        setConnection(connection);
     }
 
     public TransmiterRepositoryImpl() {
@@ -140,7 +141,7 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
 
     @Override
     public void dropDatatable() throws SQLException {
-        deleteTableStmt.executeUpdate();
+        //deleteTableStmt.executeUpdate();
     }
 
 }

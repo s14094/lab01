@@ -7,14 +7,8 @@ import pl.pawellakomiec.domain.Transmiter;
 import pl.pawellakomiec.repository.TransmiterRepository;
 
 import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Simple web api demo -- try implementning post method
- *
- * Created by tp on 24.04.17.
- */
 @RestController
 public class TransmiterApi {
 
@@ -32,18 +26,9 @@ public class TransmiterApi {
         return transmiterRepository.getById(id);
     }
 
-    @RequestMapping(value = "/transmiters", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public List<Transmiter> getTransmiters(@RequestParam(value = "filter", required = false) String f) throws SQLException {
-        List<Transmiter> transmiters = new LinkedList<Transmiter>();
-        for (Transmiter p : transmiterRepository.getAll()) {
-            if (f == null) {
-                transmiters.add(p);
-            } else if (p.getName().contains(f)) {
-                transmiters.add(p);
-            }
-        }
-        return transmiters;
+    @RequestMapping(value ="/transmiters", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Transmiter> getTransmiters() throws SQLException {
+        return transmiterRepository.getAll();
     }
 
     @RequestMapping(value = "/transmiter",
@@ -55,7 +40,7 @@ public class TransmiterApi {
         return p;
     }
 
-    @RequestMapping(value = "/transmiter/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/transmiterDelete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public int deleteTransmiter(@PathVariable("id") int id) throws SQLException {
         return new Integer(transmiterRepository.deleteTransmiter(transmiterRepository.getById(id)));
