@@ -7,6 +7,17 @@ public class Transmiter {
     private int price;
     private int power;
 
+    public Transmiter(int id, String name, int price, int power) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.power = power;
+    }
+
+    public Transmiter(){
+
+    }
+
     public int getId() {
         return id;
     }
@@ -39,5 +50,4 @@ public class Transmiter {
         this.power = power;
     }
 
-    //fdsaf
 }

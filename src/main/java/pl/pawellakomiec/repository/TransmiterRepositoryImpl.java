@@ -20,25 +20,34 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
     private PreparedStatement deleteByIdStmt;
 
     public TransmiterRepositoryImpl(Connection connection) throws SQLException {
-        this.connection = connection;
-        if (!isDatabaseReady()) {
-            createTables();
-        }
-        setConnection(connection);
+//        this.connection = connection;
+//        prepareStatements();
+//        if (!isDatabaseReady()) {
+//            createTables();
+//        }
+//        setConnection(connection);
+    }
+
+    public TransmiterRepositoryImpl() {
+
     }
 
     public Connection getConnection() {
         return connection;
     }
 
-    public void setConnection(Connection connection) throws SQLException {
-        this.connection = connection;
+
+    public void prepareStatements() throws SQLException {
         addTransmiterStmt = connection.prepareStatement("INSERT INTO Transmiter (name, price, power) VALUES (?, ?, ?)");
         getAllStmt = connection.prepareStatement("SELECT * FROM Transmiter");
         getByIdStmt = connection.prepareStatement("SELECT * FROM Transmiter WHERE id = ?");
         deleteTableStmt = connection.prepareStatement("DROP TABLE Transmiter");
         updateStmt = connection.prepareStatement("UPDATE Transmiter SET name = ? WHERE id = ?");
         deleteByIdStmt = connection.prepareStatement("DELETE FROM Transmiter WHERE id = ?");
+    }
+
+    public void setConnection(Connection connection) throws SQLException {
+        this.connection = connection;
     }
 
     public void createTables() throws SQLException {
@@ -97,12 +106,13 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
     }
 
     @Override
-    public void addTransmiter(Transmiter transmiter) {
+    public Boolean addTransmiter(Transmiter transmiter) {
         try {
             addTransmiterStmt.setString(1, transmiter.getName());
             addTransmiterStmt.setInt(2, transmiter.getPower());
             addTransmiterStmt.setInt(3, transmiter.getPrice());
             addTransmiterStmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage() + "\n" + e.getStackTrace().toString());
         }
