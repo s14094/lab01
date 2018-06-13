@@ -39,4 +39,5 @@ public class Transmiter {
         this.power = power;
     }
 
+    //fdsaf
 }
