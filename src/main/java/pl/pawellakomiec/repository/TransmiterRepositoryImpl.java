@@ -118,11 +118,9 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
 
     @Override
     public void updateTransmiter(int id, Transmiter newTransmiter) throws SQLException {
-
         updateStmt.setInt(2, id);
         updateStmt.setString(1, newTransmiter.getName());
         updateStmt.executeUpdate();
-
     }
 
     @Override

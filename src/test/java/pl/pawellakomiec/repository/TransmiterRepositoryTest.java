@@ -1,6 +1,5 @@
 package pl.pawellakomiec.repository;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -72,8 +71,12 @@ public class TransmiterRepositoryTest {
 
     @Test
     public void delete_transmiter() throws SQLException {
-        Transmiter transmiter3 = transmiterRepository.getById(3);
-        transmiterRepository.deleteTransmiter(transmiter3);
+        Transmiter transmiterNew = new Transmiter();
+        transmiterNew.setName("deletetransmiter33");
+        transmiterNew.setId(33);
+        transmiterNew.setPrice(50);
+        transmiterNew.setPower(30);
+        transmiterRepository.deleteTransmiter(transmiterNew);
         if (transmiterRepository.getAll().isEmpty()) {
             assertTrue(false);
         }
@@ -107,8 +110,10 @@ public class TransmiterRepositoryTest {
         });
     }
 
+    /*
     @After
     public void dropTable() throws SQLException {
         transmiterRepository.dropDatatable();
     }
+    */
 }
