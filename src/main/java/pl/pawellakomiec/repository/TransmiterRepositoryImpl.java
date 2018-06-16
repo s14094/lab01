@@ -3,10 +3,7 @@ package pl.pawellakomiec.repository;
 import org.springframework.stereotype.Component;
 import pl.pawellakomiec.domain.Transmiter;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,14 +26,19 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
         setConnection(connection);
     }
 
-    public TransmiterRepositoryImpl(){
-
+    public TransmiterRepositoryImpl() throws SQLException {
+        this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb");
+        if (!isDatabaseReady()) {
+            createTables();
+        }
+        this.setConnection(connection);
     }
 
 
     public Connection getConnection() {
         return connection;
     }
+
 
 
     public void setConnection(Connection connection) throws SQLException {
