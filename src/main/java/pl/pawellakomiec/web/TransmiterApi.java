@@ -1,6 +1,5 @@
 package pl.pawellakomiec.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pl.pawellakomiec.domain.Transmiter;
@@ -12,7 +11,6 @@ import java.util.List;
 @RestController
 public class TransmiterApi {
 
-    @Autowired
     TransmiterRepository transmiterRepository;
 
     @RequestMapping("/")
@@ -28,6 +26,10 @@ public class TransmiterApi {
 
     @RequestMapping(value ="/transmiters", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Transmiter> getTransmiters() throws SQLException {
+        Transmiter addTransmiter = new Transmiter();
+        addTransmiter.setId(1);
+        addTransmiter.setName("addtransmiter");
+        transmiterRepository.addTransmiter(addTransmiter);
         return transmiterRepository.getAll();
     }
 
