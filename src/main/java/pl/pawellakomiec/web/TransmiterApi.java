@@ -44,6 +44,8 @@ public class TransmiterApi {
     @RequestMapping(value = "/transmiterDelete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public int deleteTransmiter(@PathVariable("id") int id) throws SQLException {
-        return new Integer(transmiterRepository.deleteTransmiter(transmiterRepository.getById(id)));
+        Transmiter transmiterToDelete = new Transmiter();
+        transmiterToDelete.setId(id);
+        return new Integer(transmiterRepository.deleteTransmiter(transmiterToDelete));
     }
 }
