@@ -46,5 +46,4 @@ public class TransmiterApi {
     public int deleteTransmiter(@PathVariable("id") int id) throws SQLException {
         return new Integer(transmiterRepository.deleteTransmiter(transmiterRepository.getById(id)));
     }
-
 }
