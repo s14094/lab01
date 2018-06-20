@@ -93,12 +93,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <!-- exclude tests here -->
-                        <exclude>**/SiteTest.java</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
