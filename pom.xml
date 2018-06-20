@@ -96,8 +96,7 @@
                 <configuration>
                     <excludes>
                         <!-- exclude tests here -->
-                        <exclude>**/TestCircle.java</exclude>
-                        <exclude>**/TestSquare.java</exclude>
+                        <exclude>**/SiteTest.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
