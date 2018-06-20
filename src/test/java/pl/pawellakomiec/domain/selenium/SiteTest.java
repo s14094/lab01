@@ -11,12 +11,8 @@ package pl.pawellakomiec.domain.selenium;
         import java.util.Random;
         import java.util.concurrent.TimeUnit;
 
-        import org.junit.After;
-        import org.junit.AfterClass;
-        import org.junit.Before;
-        import org.junit.BeforeClass;
-        import org.junit.Test;
-                import org.apache.commons.io.FileUtils;
+        import org.junit.*;
+        import org.apache.commons.io.FileUtils;
                 import org.openqa.selenium.Alert;
         import org.openqa.selenium.By;
         import org.openqa.selenium.NoAlertPresentException;
@@ -31,7 +27,7 @@ package pl.pawellakomiec.domain.selenium;
         import org.openqa.selenium.firefox.FirefoxOptions;
         import org.openqa.selenium.interactions.Actions;
 
-
+@Ignore
 public class SiteTest {
 
 

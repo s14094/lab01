@@ -94,7 +94,7 @@ public class TransmiterRepositoryTest {
     @Test
     public void update_transmiter() throws SQLException {
 
-        Transmiter transmiter2 = transmiterRepository.getById(2);
+        Transmiter transmiter2 = transmiterRepository.getById(6);
 
         int updateId = 1;
         transmiter2.setName("transmiter222");
