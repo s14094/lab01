@@ -1,4 +1,4 @@
-package pl.pawellakomiec.domain;
+package pl.pawellakomiec.domain.selenium;
 
         import static org.junit.Assert.assertEquals;
         import static org.junit.Assert.assertNotNull;

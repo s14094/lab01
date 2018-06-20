@@ -2,8 +2,7 @@ language: java
 notifications:
     email: false
     ignore:
-      - *.md
-      - lab01/src/test/java/pl/pawellakomiec/domain/SiteTest.java
+      - pl/pawellakomiec/domain/selenium
 install: true
 before_script:
 - cd scripts; ./server.sh &
