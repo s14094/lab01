@@ -13,7 +13,8 @@ package pl.pawellakomiec.domain.selenium;
 
         import org.junit.*;
         import org.apache.commons.io.FileUtils;
-                import org.openqa.selenium.Alert;
+
+        import org.openqa.selenium.Alert;
         import org.openqa.selenium.By;
         import org.openqa.selenium.NoAlertPresentException;
         import org.openqa.selenium.NoSuchElementException;

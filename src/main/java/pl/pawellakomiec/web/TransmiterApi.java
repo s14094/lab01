@@ -3,11 +3,13 @@ package pl.pawellakomiec.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import pl.pawellakomiec.domain.Transmiter;
 import pl.pawellakomiec.repository.TransmiterRepository;
 
 import java.sql.SQLException;
 import java.util.List;
+
 
 @RestController
 public class TransmiterApi {
@@ -15,10 +17,12 @@ public class TransmiterApi {
     @Autowired
     TransmiterRepository transmiterRepository;
 
+    /*
     @RequestMapping("/")
     public String index() {
-        return "Everything works. ;)";
+        return "index.html";
     }
+    */
 
 
     @RequestMapping(value = "/transmiter/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,7 +31,7 @@ public class TransmiterApi {
         return transmiterRepository.getById(id);
     }
 
-    @RequestMapping(value ="/transmiters", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/transmiters", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Transmiter> getTransmiters() throws SQLException {
         return transmiterRepository.getAll();
     }
