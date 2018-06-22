@@ -22,7 +22,6 @@
 
 
     </script>
-
     <style>
         body {
             background: #eee url(http://subtlepatterns.com/patterns/sativa.png);
@@ -33,6 +32,7 @@
             height: 100%;
         }
     </style>
+
 
 </head>
 <body>
@@ -45,45 +45,33 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/login">Zaloguj</a></li>
-                <li><a href="/add">Dodaj Transmiter</a></li>
+                <li class="active"><a href="/add">Dodaj Transmiter</a></li>
                 <li><a href="/deleteTransmiter">Usun Transmiter</a></li>
-                <li class="active"><a href="/getAll">Lista Transmiterow</a></li>
+                <li><a href="/getAll">Lista Transmiterow</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container">
-
-    <div class="starter-template">
-
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="id">id</th>
-                <th scope="Nazwa">Nazwa</th>
-                <th scope="Cena">Cena</th>
-                <th scope="Power">Power</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${transmiterList}" var="transmiter">
-                <tr>
-                    <td><c:out value="${transmiter.id}"/></td>
-                    <td><c:out value="${transmiter.name}"/></td>
-                    <td><c:out value="${transmiter.price}"/></td>
-                    <td><c:out value="${transmiter.power}"/></td>
-
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-
-    </div>
-
+    <h2>Dodaj transmiter</h2>
+    <form action="/addSuccess" method="post">
+        <div class="form-group">
+            <label for="name">Nazwa:</label>
+            <input type="text" class="form-control" id="name" placeholder="Podaj nazwe" name="name">
+        </div>
+        <div class="form-group">
+            <label for="price">Cena:</label>
+            <input type="text" class="form-control" id="price" placeholder="Podaj cene" name="price">
+        </div>
+        <div class="form-group">
+            <label for="power">Moc:</label>
+            <input type="text" class="form-control" id="power" placeholder="Podaj moc" name="power">
+        </div>
+        <button type="submit" class="btn btn-default">Dodaj</button>
+    </form>
 </div>
+
 
 <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

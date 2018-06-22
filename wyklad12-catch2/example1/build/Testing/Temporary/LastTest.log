@@ -1,21 +1,21 @@
-Start testing: Jun 20 15:50 CEST
+Start testing: Jun 22 13:42 CEST
 ----------------------------------------------------------
 1/1 Testing: tests
 1/1 Test: tests
 Command: "/Users/mac/IdeaProjects/lab01/wyklad12-catch2/example1/build/tests"
 Directory: /Users/mac/IdeaProjects/lab01/wyklad12-catch2/example1
-"tests" start time: Jun 20 15:50 CEST
+"tests" start time: Jun 22 13:42 CEST
 Output:
 ----------------------------------------------------------
 ===============================================================================
 All tests passed (6 assertions in 3 test cases)
 
 <end of output>
-Test time =   0.01 sec
+Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"tests" end time: Jun 20 15:50 CEST
+"tests" end time: Jun 22 13:42 CEST
 "tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jun 20 15:50 CEST
+End testing: Jun 22 13:42 CEST

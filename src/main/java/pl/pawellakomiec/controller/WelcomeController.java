@@ -1,4 +1,4 @@
-package pl.pawellakomiec;
+package pl.pawellakomiec.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
