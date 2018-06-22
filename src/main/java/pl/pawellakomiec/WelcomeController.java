@@ -10,7 +10,7 @@ import java.util.Map;
 public class WelcomeController {
 
 
-    @RequestMapping("/all")
+    @RequestMapping("/hello")
     public String welcome(Map<String, Object> model) {
 
         return "welcome";

@@ -21,12 +21,11 @@
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Spring Boot</a>
+            <a class="navbar-brand active" href="/hello">Home</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="/getAll">Wszystkie</a></li>
             </ul>
         </div>
     </div>
@@ -36,7 +35,7 @@
 
     <div class="starter-template">
         <h1>Spring Boot Web JSP Example</h1>
-        <h2>Message: ${message}</h2>
+        <h2>Strina startowa, witaj!</h2>
     </div>
 
 </div>
