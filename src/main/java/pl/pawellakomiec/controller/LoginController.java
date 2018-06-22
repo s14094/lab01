@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import pl.pawellakomiec.service.LoginService;
 
+import java.util.Map;
+
 @Controller
 @SessionAttributes("name")
 public class LoginController {
@@ -29,6 +31,12 @@ public class LoginController {
         }
         model.put("name", name);
         model.put("password", password);
-        return "welcome";
+        return "loginCheck";
+    }
+
+    @RequestMapping("/logout")
+    public String welcome(Map<String, Object> model) {
+
+        return "logout";
     }
 }

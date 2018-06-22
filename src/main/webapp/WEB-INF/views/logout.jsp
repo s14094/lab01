@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<%@ page session="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <html lang="en">
 <head>
 
@@ -13,10 +13,15 @@
 	<spring:url value="/css/main.css" var="springCss" />
 	<link href="${springCss}" rel="stylesheet" />
 	 -->
-    <c:url value="" var="jstlCss"/>
-    <link href="${jstlCss}" rel="stylesheet"/>
+
+    <script type="text/javascript">
+
+        function newLocation() {
+            window.location = '/deleteSpecificTransmiter/?id=' + id;
+        }
 
 
+    </script>
     <style>
         body {
             background: #eee url(http://subtlepatterns.com/patterns/sativa.png);
@@ -27,6 +32,7 @@
             height: 100%;
         }
     </style>
+
 
 </head>
 <body>
@@ -40,8 +46,8 @@
             <ul class="nav navbar-nav">
                 <c:choose>
                     <c:when test="${sessionScope.size() > 0}">
-                        <li><a href="/logout">Wyloguj</a></li>
-                        <li class="active"><a href="/add">Dodaj Transmiter</a></li>
+                        <li class="active"><a href="/logout">Wyloguj</a></li>
+                        <li><a href="/add">Dodaj Transmiter</a></li>
                         <li><a href="/deleteTransmiter">Usun Transmiter</a></li>
                         <li><a href="/getAll">Lista Transmiterow</a></li>
                     </c:when>
@@ -54,19 +60,9 @@
     </div>
 </nav>
 
-<div class="container">
-
-    <div class="starter-template">
-        <h1>Spring Boot Web JSP Example</h1>
-        <h2>Strina startowa, witaj! <c:out value="${sessionScope.name}"/></h2>
-    </div>
-
-
-
-</div>
-
-<script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-</body>
-
+<% session.removeAttribute("user");
+    session.invalidate(); %> <h1>Wylogowano pomyslnie</h1></body>
 </html>
+
+
+

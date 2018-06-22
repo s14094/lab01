@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page session="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
@@ -44,10 +45,17 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/login">Zaloguj</a></li>
-                <li class="active"><a href="/add">Dodaj Transmiter</a></li>
-                <li><a href="/deleteTransmiter">Usun Transmiter</a></li>
-                <li><a href="/getAll">Lista Transmiterow</a></li>
+                <c:choose>
+                    <c:when test="${sessionScope.size() > 0}">
+                        <li><a href="/logout">Wyloguj</a></li>
+                        <li class="active"><a href="/add">Dodaj Transmiter</a></li>
+                        <li><a href="/deleteTransmiter">Usun Transmiter</a></li>
+                        <li><a href="/getAll">Lista Transmiterow</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/login">Zaloguj</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </div>
