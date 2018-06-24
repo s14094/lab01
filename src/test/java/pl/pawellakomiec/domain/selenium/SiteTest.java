@@ -41,7 +41,7 @@ public class SiteTest {
     public void setUp() throws Exception {
         System.setProperty("webdriver.chrome.driver","src/test/java/pl/pawellakomiec/resources/Selenium/chromedriver");
         driver = new ChromeDriver();
-        baseUrl = "http://automationpractice.com";
+        baseUrl = "localhost:8080";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -52,13 +52,50 @@ public class SiteTest {
         return n;
     }
 
-    @Test
     public void successfulRegistrationTest() throws Exception {
         String email = "Testowy" + number() + "@gmail.com";
         registration(email, "1", "Test", "Last", "21377", "Rolety tu i tam 22", "Ames", "17", "77722", "2", "500100900");
     }
 
     @Test
+    public void successfulloginTest() throws Exception {
+        login("admin", "admin1");
+    }
+
+    private void login(String username, String password){
+        driver.get(baseUrl + "/login");
+
+        driver.findElement(By.id("name")).clear();
+        driver.findElement(By.id("name")).sendKeys(username);
+        driver.findElement(By.id("password")).clear();
+        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("buttonLogin")).click();
+
+    }
+
+
+    @Test
+    public void successAddTransmiterTest() throws Exception {
+        addTransmiter("addtest", "22", "333");
+    }
+
+    private void addTransmiter(String name, String price, String power) throws Exception{
+        driver.get(baseUrl + "/add");
+
+        driver.findElement(By.id("name")).clear();
+        driver.findElement(By.id("name")).sendKeys(name);
+        driver.findElement(By.id("price")).clear();
+        driver.findElement(By.id("price")).sendKeys(price);
+        driver.findElement(By.id("power")).clear();
+        driver.findElement(By.id("power")).sendKeys(power);
+        driver.findElement(By.id("addTransmiterButton")).click();
+
+
+        Thread.sleep(2000);
+        assertEquals(false, driver.findElement(By.id("alertDiv")).isDisplayed());
+    }
+
+
     public void failedRegistrationTest_email() throws Exception {
         //email
         int n = number();
@@ -82,7 +119,7 @@ public class SiteTest {
 
     }
 
-    @Test
+
     public void failedRegistrationTest() throws Exception {
         //firstname
         int n = number();
@@ -248,7 +285,7 @@ public class SiteTest {
 
     }
 
-    @Test
+
     public void registrationValidationTest () throws Exception {
         //sprawdzam czy poprawnie wyswietli komuniaty o bledzie
         int n = number();

@@ -61,22 +61,40 @@
     </div>
 </nav>
 
+<script type="text/javascript">
+    function validateForm()
+    {
+        var a=document.forms["form"]["name"].value;
+
+        if (a==null || a=="" ||a==" ")
+        {
+            document.getElementById(alertDiv).style.display = 'block';
+            alert("Please Fill All Required Field");
+            return false;
+        }
+    }
+</script>
+
 <div class="container">
     <h2>Dodaj transmiter</h2>
-    <form action="/addSuccess" method="post">
+
+    <div id="alertDiv" style="display: none">Podaj wartosci</div>
+
+
+    <form action="/addSuccess" method="post" name="form" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="name">Nazwa:</label>
-            <input type="text" class="form-control" id="name" placeholder="Podaj nazwe" name="name">
+            <input type="text" class="form-control" id="name" name="name">
         </div>
         <div class="form-group">
             <label for="price">Cena:</label>
-            <input type="text" class="form-control" id="price" placeholder="Podaj cene" name="price">
+            <input type="number" class="form-control" id="price" name="price">
         </div>
         <div class="form-group">
             <label for="power">Moc:</label>
-            <input type="text" class="form-control" id="power" placeholder="Podaj moc" name="power">
+            <input type="number" class="form-control" id="power" name="power">
         </div>
-        <button type="submit" class="btn btn-default">Dodaj</button>
+        <button type="submit" id="addTransmiterButton" class="btn btn-default">Dodaj</button>
     </form>
 </div>
 

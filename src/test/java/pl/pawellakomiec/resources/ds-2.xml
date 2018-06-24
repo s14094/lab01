@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <TRANSMITER NAME="tran1" PRICE="1090"/>
+    <TRANSMITER NAME="tran2" PRICE="2011"/>
+    <TRANSMITER NAME="tran3" PRICE="1939"/>
+    <TRANSMITER NAME="tran4" PRICE="1290"/>
+</dataset>

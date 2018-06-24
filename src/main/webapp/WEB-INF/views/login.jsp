@@ -195,9 +195,9 @@
         <div class="avatar"></div>
         <div class="form-box">
             <form method="post">
-                <input type="text" name="name"/>
-                <input type="password" name="password"/>
-                <button class="btn btn-info btn-block login" type="submit">Zaloguj</button>
+                <input type="text" id="name" name="name"/>
+                <input type="password" id="password" name="password"/>
+                <button class="btn btn-info btn-block login" id="buttonLogin" type="submit">Zaloguj</button>
             </form>
         </div>
     </div>
