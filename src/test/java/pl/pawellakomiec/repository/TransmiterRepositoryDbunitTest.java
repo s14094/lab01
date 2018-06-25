@@ -11,18 +11,21 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import pl.pawellakomiec.domain.Transmiter;
 
 import java.net.URL;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+@Ignore
 @RunWith(JUnit4.class)
 public class TransmiterRepositoryDbunitTest extends DBTestCase {
     public static String url = "jdbc:hsqldb:hsql://localhost/workdb";
+
 
     TransmiterRepository transmiterRepository;
 
@@ -33,17 +36,19 @@ public class TransmiterRepositoryDbunitTest extends DBTestCase {
 
     @Before
     public void setUp() throws Exception {
+        Class.forName("org.hsqldb.jdbc.JDBCDriver");
         super.setUp();
-        transmiterRepository = new TransmiterRepositoryImpl(DriverManager.getConnection(url));
+        transmiterRepository = TransmiterRepositoryFactory.getInstance();
     }
 
     @Test
     public void doNothing() throws SQLException {
-        assertEquals(4, transmiterRepository.getAll().size());
+        assertNotNull(transmiterRepository.getAll());
     }
 
-    @Test
+
     public void checkAdding() throws Exception {
+
         Transmiter transmiter = new Transmiter();
         transmiter.setName("addtestTransdbunit");
         transmiter.setPrice(32);
@@ -60,6 +65,17 @@ public class TransmiterRepositoryDbunitTest extends DBTestCase {
         Assertion.assertEquals(expectedTable, filteredTable);
         transmiterRepository.deleteTransmiter(transmiter);
     }
+
+    @Test
+    public void checkSelect() throws Exception {
+        IDataSet dbDataSet = this.getConnection().createDataSet();
+        ITable actualTable = dbDataSet.getTable("TRANSMITER");
+//        ITable filteredTable = DefaultColumnFilter.excludedColumnsTable(actualTable, new String[]{"ID"});
+        IDataSet expectedDataSet = getDataSet("ds-1.xml");
+        ITable expectedTable = expectedDataSet.getTable("TRANSMITER");
+        Assertion.assertEquals(expectedTable, actualTable);
+    }
+
 
     @Override
     protected DatabaseOperation getSetUpOperation() throws Exception {

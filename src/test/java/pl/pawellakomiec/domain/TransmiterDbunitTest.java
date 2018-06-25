@@ -7,6 +7,7 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import pl.pawellakomiec.repository.TransmiterRepositoryDbunitTest;
@@ -14,10 +15,12 @@ import pl.pawellakomiec.repository.TransmiterRepositoryImpl;
 
 import java.sql.DriverManager;
 
+@Ignore
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         TransmiterRepositoryDbunitTest.class
 })
+
 public class TransmiterDbunitTest {
     @BeforeClass
     public static void before() throws Exception {
@@ -31,10 +34,12 @@ public class TransmiterDbunitTest {
 
         JdbcDatabaseTester databaseTester = new PropertiesBasedJdbcDatabaseTester();
 
+
         FlatXmlDataSet dataSet = new FlatXmlDataSetBuilder().build(
                 TransmiterDbunitTest.class.getClassLoader().
                         getResource("databaseDump.xml").openStream()
         );
+
 
         databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
         databaseTester.setDataSet(dataSet);

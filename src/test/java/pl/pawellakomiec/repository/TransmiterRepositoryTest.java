@@ -2,6 +2,7 @@ package pl.pawellakomiec.repository;
 
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -91,12 +92,13 @@ public class TransmiterRepositoryTest {
         assertNotNull(transmiterRepository.getById(idToFind));
     }
 
+
     @Test
     public void update_transmiter() throws SQLException {
 
         Transmiter transmiter2 = transmiterRepository.getById(6);
 
-        int updateId = 1;
+        int updateId = 6;
         transmiter2.setName("transmiter222");
 
         transmiterRepository.updateTransmiter(updateId, transmiter2);
