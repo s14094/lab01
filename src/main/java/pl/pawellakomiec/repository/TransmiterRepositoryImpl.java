@@ -54,6 +54,7 @@ public class TransmiterRepositoryImpl implements TransmiterRepository {
 //    public void setConnection(Connection connection) throws SQLException {
 //        this.connection = connection;
 //    }
+//
 
     public void createTables() throws SQLException {
         connection.createStatement().executeUpdate(
