@@ -8,8 +8,6 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({ @NamedQuery(name = "Person.find", query = "SELECT p from Person p where p.firstName like :name "
         + "or p.lastName like :name") })
-
-
 public class Person {
 
 

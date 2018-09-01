@@ -16,14 +16,11 @@ import pl.pawellakomiec.service.PersonService;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
-
-
+@DatabaseSetup("/sampleData.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(locations = { "classpath:/beans.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
         DbUnitTestExecutionListener.class})
-
-
 public class PersonServiceTest {
 
     @Autowired
