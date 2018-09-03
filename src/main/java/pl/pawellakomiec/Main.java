@@ -30,9 +30,9 @@ public class Main extends SpringBootServletInitializer {
         IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
 
         FlatXmlDataSet.write(connection.createDataSet(),
-                new FileOutputStream("src/test/java/pl/pawellakomiec/resources/databaseDump.xml"));
+                new FileOutputStream("src/test/resources/databaseDump.xml"));
         FlatDtdDataSet.write(connection.createDataSet(),
-                new FileOutputStream("src/test/java/pl/pawellakomiec/resources/databaseDump.dtd"));
+                new FileOutputStream("src/test/resources/databaseDump.dtd"));
     }
 
     @Override

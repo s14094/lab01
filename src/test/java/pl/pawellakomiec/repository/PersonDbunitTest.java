@@ -1,5 +1,10 @@
 package pl.pawellakomiec.repository;
 
+import static org.junit.Assert.*;
+
+import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import org.dbunit.Assertion;
 import org.dbunit.DBTestCase;
@@ -15,19 +20,14 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import pl.pawellakomiec.domain.Transmiter;
-
-import java.net.URL;
-import java.sql.SQLException;
+import pl.pawellakomiec.domain.Person;
 
 
-@Ignore
 @RunWith(JUnit4.class)
-public class TransmiterRepositoryDbunitTest extends DBTestCase {
+public class PersonDbunitTest extends DBTestCase {
     public static String url = "jdbc:hsqldb:hsql://localhost/workdb";
 
-
-    TransmiterRepository transmiterRepository;
+    PersonRepository personManager;
 
     @After
     public void tearDown() throws Exception {
@@ -36,46 +36,36 @@ public class TransmiterRepositoryDbunitTest extends DBTestCase {
 
     @Before
     public void setUp() throws Exception {
-        Class.forName("org.hsqldb.jdbc.JDBCDriver");
         super.setUp();
-        transmiterRepository = TransmiterRepositoryFactory.getInstance();
+        personManager = new PersonRepositoryImpl(DriverManager.getConnection(url));
+    }
+
+    @Ignore
+    @Test
+    public void doNothing() {
+        assertEquals(4, personManager.getAllPersons().size());
     }
 
     @Test
-    public void doNothing() throws SQLException {
-        assertNotNull(transmiterRepository.getAll());
-    }
-
-
     public void checkAdding() throws Exception {
+        Person person = new Person();
+        person.setName("Janek");
+        person.setYob(1939);
 
-        Transmiter transmiter = new Transmiter();
-        transmiter.setName("addtestTransdbunit");
-        transmiter.setPrice(32);
-        transmiter.setPower(33);
+        assertEquals(1, personManager.addPerson(person));
 
-        assertEquals(1, transmiterRepository.addTransmiter(transmiter));
-
+        // Data verification
 
         IDataSet dbDataSet = this.getConnection().createDataSet();
-        ITable actualTable = dbDataSet.getTable("TRANSMITER");
-        ITable filteredTable = DefaultColumnFilter.excludedColumnsTable(actualTable, new String[]{"ID"});
+        ITable actualTable = dbDataSet.getTable("PERSON");
+        ITable filteredTable = DefaultColumnFilter.excludedColumnsTable(actualTable, new String[] { "ID" });
         IDataSet expectedDataSet = getDataSet("ds-2.xml");
-        ITable expectedTable = expectedDataSet.getTable("TRANSMITER");
+        ITable expectedTable = expectedDataSet.getTable("PERSON");
+        // (posortowane? proszę bardzo:) // Assertion.assertEquals(new SortedTable(expectedTable),
+        // (posortowane? proszę bardzo:) //     new SortedTable(filteredTable, expectedTable.getTableMetaData()));
         Assertion.assertEquals(expectedTable, filteredTable);
-        transmiterRepository.deleteTransmiter(transmiter);
+        personManager.deletePerson(person); // wyczyszczenie
     }
-
-    @Test
-    public void checkSelect() throws Exception {
-        IDataSet dbDataSet = this.getConnection().createDataSet();
-        ITable actualTable = dbDataSet.getTable("TRANSMITER");
-//        ITable filteredTable = DefaultColumnFilter.excludedColumnsTable(actualTable, new String[]{"ID"});
-        IDataSet expectedDataSet = getDataSet("ds-1.xml");
-        ITable expectedTable = expectedDataSet.getTable("TRANSMITER");
-        Assertion.assertEquals(expectedTable, actualTable);
-    }
-
 
     @Override
     protected DatabaseOperation getSetUpOperation() throws Exception {

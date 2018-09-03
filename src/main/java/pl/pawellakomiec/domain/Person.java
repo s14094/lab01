@@ -1,50 +1,56 @@
 package pl.pawellakomiec.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-
-@Entity
-@NamedQueries({ @NamedQuery(name = "Person.find", query = "SELECT p from Person p where p.firstName like :name "
-        + "or p.lastName like :name") })
 public class Person {
 
+    private long id;
 
-    @Id
-    private int id;
+    private String name;
+    private int yob;
 
-    private String title;
+    public Person() {
+    }
 
-    private String firstName;
+    public Person(String name, int yob) {
+        this.name = name;
+        this.yob = yob;
+    }
 
-    private String lastName;
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getName() {
+        return name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public int getYob() {
+        return yob;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setYob(int yob) {
+        this.yob = yob;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    @Override
+    public boolean equals(Object o) {
+        Person other = (Person) o;
+        boolean ret = other.getName().equals(this.getName()) &&
+                (other.getId() == this.getId()) &&
+                (other.getYob() == this.getYob());
+        return ret;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + id + ", "
+                + name + ", " + yob + "]";
     }
 }

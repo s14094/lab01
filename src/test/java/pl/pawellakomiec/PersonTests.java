@@ -1,4 +1,7 @@
-package pl.pawellakomiec.domain;
+package pl.pawellakomiec;
+
+
+import java.sql.DriverManager;
 
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
@@ -7,39 +10,33 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import pl.pawellakomiec.repository.TransmiterRepositoryDbunitTest;
-import pl.pawellakomiec.repository.TransmiterRepositoryImpl;
+import pl.pawellakomiec.repository.PersonDbunitTest;
+import pl.pawellakomiec.repository.PersonRepositoryImpl;
 
-import java.sql.DriverManager;
 
-@Ignore
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        TransmiterRepositoryDbunitTest.class
+        PersonDbunitTest.class
 })
-
-public class TransmiterDbunitTest {
+public class PersonTests {
     @BeforeClass
     public static void before() throws Exception {
         String url = "jdbc:hsqldb:hsql://localhost/workdb";
 
-        new TransmiterRepositoryImpl(DriverManager.getConnection(url));
-        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "org.hsqldb.jdbcDriver");
-        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:hsqldb:hsql://localhost/workdb");
-        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "sa");
-        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "");
+        new PersonRepositoryImpl(DriverManager.getConnection(url));
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "org.hsqldb.jdbcDriver" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:hsqldb:hsql://localhost/workdb" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "sa" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "" );
 
         JdbcDatabaseTester databaseTester = new PropertiesBasedJdbcDatabaseTester();
 
-
         FlatXmlDataSet dataSet = new FlatXmlDataSetBuilder().build(
-                TransmiterDbunitTest.class.getClassLoader().
-                        getResource("databaseDump.xml").openStream()
+                PersonTests.class.getClassLoader().
+                        getResource("ds-0.xml").openStream()
         );
-
 
         databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
         databaseTester.setDataSet(dataSet);
