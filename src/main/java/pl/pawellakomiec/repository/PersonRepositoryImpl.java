@@ -31,6 +31,11 @@ public class PersonRepositoryImpl implements PersonRepository {
     }
 
     public PersonRepositoryImpl() throws SQLException {
+        this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb");
+        if (!isDatabaseReady()) {
+            createTables();
+        }
+        this.setConnection(connection);
     }
 
     public void createTables() throws SQLException {
